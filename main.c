@@ -122,6 +122,17 @@ const byte EMOJI[][8] = { //http://xantorohara.github.io/led-matrix-editor/
     B00011000,
     B00110001
   } // right 7~11
+  ,
+  {
+    B00111100,
+    B01000010,
+    B10100101,
+    B10011001,
+    B10011001,
+    B10100101,
+    B01000010,
+    B00111100
+  } // cancle 12
 /*
   {
     B00010000,
@@ -252,18 +263,27 @@ void loop() {
   //Serial.println(joy_y);                                    // 시리얼 모니터에 출력 - (Y 좌표 신호)
     
   if(joy_x < 100) {
-    bluetooth.print("0");
+    bluetooth.write("0");
     for(int i = 2; i <= 6 ; i++) {
       displayImage(EMOJI[i]);
       delay(100);
     }
   }
   if(joy_x > 1000) {
-    bluetooth.print("1");
+    bluetooth.write("1");
     for(int i = 7; i <= 11; i++) {
       displayImage(EMOJI[i]);
       delay(100);
     }
+  }
+  if(joy_y <100) {
+    bluetooth.write("2");
+    displayImage(EMOJI[12]);
+    delay(200);
+  }
+  if(joy_y > 1000) {
+    bluetooth.write("3");
+    delay(200);
   }
   displayImage(EMOJI[1]);
   if(bluetooth.available())
