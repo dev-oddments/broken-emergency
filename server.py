@@ -3,6 +3,12 @@ import bluetooth
 import os
 import sys
 
+import RPi.GPIO as GPIO
+import time
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+time.sleep(1)
+
 print "Searching for devices..."
 print ""
 nearby_devices = bluetooth.discover_devices()
@@ -26,6 +32,7 @@ cmd2 = 'feh -F --auto-zoom ~/disable_display/img/2_ri.png &'
 smile = 'feh -F --auto-zoom ~/disable_display/img/3_smile.png &'
 default = 'feh -F --auto-zoom img/default.png &'
 kill = 'pkill -9 -ef feh'
+count = 0
 
 while 1:
   why = sock.recv(1024)
@@ -48,3 +55,16 @@ while 1:
  
   elif(why == '4'):
     os.system(kill)
+###https://m.blog.naver.com/PostView.nhn?blogId=cosmosjs&logNo=220805719737&proxyReferer=https%3A%2F%2Fwww.google.co.kr%2F
+  
+  result = GPIO.input(23)
+	if result == 1:
+    count += 1
+    if count == 10:
+      os.system('python coolsms.py')
+		  print("진동이 감지 되었습니다.")
+		  time.sleep(0.05)
+      count = 0
+	else:
+		print("진동이 없습니다.")
+		time.sleep(0.05)
