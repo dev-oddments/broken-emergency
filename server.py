@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-
-from Tkinter import *
 import bluetooth
 import os
 import sys
@@ -23,21 +21,30 @@ port = 1
 sock = bluetooth.BluetoothSocket( bluetooth.RFCOMM )
 sock.connect((bd_addr, port))
 data = ""
-cmd1 = 'feh -F --auto-zoom ~/disable_display/img/1.png &'
-cmd2 = 'feh -F --auto-zoom ~/disable_display/img/2.png &'
-cmd3 = 'feh -F --auto-zoom ~/disable_display/img/4.png &'
+cmd1 = 'feh -F --auto-zoom ~/disable_display/img/1_le.png &'
+cmd2 = 'feh -F --auto-zoom ~/disable_display/img/2_ri.png &'
+smile = 'feh -F --auto-zoom ~/disable_display/img/3_smile.png &'
+default = 'feh -F --auto-zoom img/default.png &'
 kill = 'pkill -9 -ef feh'
 
 while 1:
   why = sock.recv(1024)
-  if(why == '0'):
-    os.system(cmd2)
-    print("ln")
-  elif(why == '1'):
+  if(why == '1'):
     os.system(cmd1)
-    print("lu")
+    delay(500)
+    os.system(default)
+    print("ln")
+    
   elif(why == '2'):
-    os.system(kill)
+    os.system(cmd2)
+    delay(500)
+    os.system(default)
+    print("lu")
+
   elif(why == '3'):
-  os.system(cmd3)
+    os.system(smile)
+    delay(500)
+    os.system(default)
  
+  elif(why == '4'):
+    os.system(kill)
