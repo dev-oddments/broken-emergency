@@ -235,7 +235,6 @@ int bluetoothRx = 3;
 SoftwareSerial bluetooth(bluetoothTx, bluetoothRx); // ___bluetooth___
 
 void setup() {
-
   Serial.begin(9600);                               
   pinMode(JOY_push, INPUT); // ___ JOY ___
   
@@ -244,7 +243,6 @@ void setup() {
   display.clearDisplay(0); // ___DOT___
   
   bluetooth.begin(9600); // ___bluetooth___
-  
 }
 
 void displayImage(const byte* image) {
@@ -254,6 +252,7 @@ void displayImage(const byte* image) {
     }
   }
 }
+
 void loop() {
   int joy_push = digitalRead(JOY_push);                       // 변수 push에 디지털 3번핀에 입력되는 신호를 대입
   int joy_x = analogRead(JOY_X);                           // 변수 X에 아날로그 1번핀에 입력되는 신호를 대입
@@ -262,30 +261,36 @@ void loop() {
   //Serial.print(joy_x);                                      // 시리얼 모니터에 출력 - (X 좌표 신호)
   //Serial.println(joy_y);                                    // 시리얼 모니터에 출력 - (Y 좌표 신호)
     
-  if(joy_x < 100) {
-    bluetooth.write("0");
+  if(joy_x < 100) { // left
+    bluetooth.write("1");
     for(int i = 2; i <= 6 ; i++) {
       displayImage(EMOJI[i]);
       delay(100);
     }
   }
-  if(joy_x > 1000) {
-    bluetooth.write("1");
+  
+  if(joy_x > 1000) { // right
+    bluetooth.write("2");
     for(int i = 7; i <= 11; i++) {
       displayImage(EMOJI[i]);
       delay(100);
     }
   }
-  if(joy_y <100) {
-    bluetooth.write("2");
+
+  if(joy_y > 1000) { // smile
+    bluetooth.write("3");
+    displayImage(EMOJI[0]);
+    delay(200);
+  }
+  
+  if(joy_y <100) { // kill
+    bluetooth.write("4");
     displayImage(EMOJI[12]);
     delay(200);
   }
-  if(joy_y > 1000) {
-    bluetooth.write("3");
-    delay(200);
-  }
-  displayImage(EMOJI[1]);
+  
+  displayImage(EMOJI[1]); // default 
+  
   if(bluetooth.available())
   {
     char toSend = (char)bluetooth.read();
