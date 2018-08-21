@@ -23,21 +23,21 @@ port = 1
 sock = bluetooth.BluetoothSocket( bluetooth.RFCOMM )
 sock.connect((bd_addr, port))
 data = ""
-cmd1 = 'feh -F --auto-zoom ~/disable_display/img/1_left.jpeg &'
-cmd2 = 'feh -F --auto-zoom ~/disable_display/img/2_right.jpeg &'
-cmd3 = 'feh -F --auto-zoom ~/disable_display/img/3_smile.jpeg &'
+cmd1 = 'feh -F --auto-zoom ~/disable_display/img/1.png &'
+cmd2 = 'feh -F --auto-zoom ~/disable_display/img/2.png &'
+cmd3 = 'feh -F --auto-zoom ~/disable_display/img/4.png &'
 kill = 'pkill -9 -ef feh'
 
 while 1:
   why = sock.recv(1024)
   if(why == '0'):
-    os.system(cmd1)
+    os.system(cmd2)
     print("ln")
   elif(why == '1'):
-    os.system(cmd2)
+    os.system(cmd1)
     print("lu")
   elif(why == '2'):
     os.system(kill)
   elif(why == '3'):
-    os.system(cmd3)
+  os.system(cmd3)
  
