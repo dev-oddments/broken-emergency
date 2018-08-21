@@ -1,4 +1,4 @@
-# KAIST Maker Campus-A-Thon
+# Maker Campus-A-Thon
 ## 아이디어씽킹
 사람을 배제하고 기술위주로 뭔가를 만드는것이 문제이다.
 
@@ -24,6 +24,6 @@
 - [x] 받은 신호를 가지고 LCD를 통해 좌향등, 우향등, 이모티콘 등 자신의 의지를 표현 
 
 > Application - 현재 위치, 목적지, 경로, 속력, 후미등 제어등을 할 수 있도록 함
-- [ ]체인 + 바퀴 + 바디를 간단하게 만들어 리드스위치로 속력 계산 가능하도록 함
 
-- [ ]라즈베리파이에 충격센서 연결 및 충격신호 감지시 깨진이미지 LCD에 출력 및 보호자에게 SMS, Mail 전송 
+- [ ] 체인 + 바퀴 + 바디를 간단하게 만들어 리드스위치로 속력 계산 가능하도록 함 // 
+- [ ] 라즈베리파이에 충격센서 연결 및 충격신호 감지시 깨진이미지 LCD에 출력 및 보호자에게 SMS, Mail 전송 // coolsms | [Line API](http://blog.daum.net/_blog/BlogTypeView.do?blogid=0drsH&articleno=80&categoryId=4&regdt=20180720181606) | [Telegram](http://egloos.zum.com/mcchae/v/11263778) | [Mail](http://pythonstudy.xyz/python/article/508-%EB%A9%94%EC%9D%BC-%EB%B3%B4%EB%82%B4%EA%B8%B0-SMTP)
