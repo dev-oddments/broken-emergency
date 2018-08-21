@@ -1,4 +1,6 @@
 #include "LedControl.h"
+#include <SoftwareSerial.h>
+
 
 const int JOY_push = 4;
 const int JOY_X = 1; // analog
@@ -214,10 +216,12 @@ const byte EMOJI[][8] = { //http://xantorohara.github.io/led-matrix-editor/
   }
 */
 };
- 
 const int IMAGES_LEN = sizeof(EMOJI) / 8;
 LedControl display = LedControl(DIN_PIN, CLK_PIN, CS_PIN); // (DIN, CS, CLK, 1dot) ___DOT___
 
+int bluetoothTx = 2;
+int bluetoothRx = 3;
+SoftwareSerial bluetooth(bluetoothTx, bluetoothRx); // ___bluetooth___
 
 void setup() {
 
@@ -227,6 +231,8 @@ void setup() {
   display.shutdown(0, false);
   display.setIntensity(0, 5); // LED 밝기(0~15)
   display.clearDisplay(0); // ___DOT___
+  
+  bluetooth.begin(9600); // ___bluetooth___
   
 }
 
@@ -244,18 +250,25 @@ void loop() {
   //Serial.print(joy_push);                                  // 시리얼 모니터에 출력 - (push 버튼 신호)
   //Serial.print(joy_x);                                      // 시리얼 모니터에 출력 - (X 좌표 신호)
   //Serial.println(joy_y);                                    // 시리얼 모니터에 출력 - (Y 좌표 신호)
+    
   if(joy_x < 100) {
+    bluetooth.print("0");
     for(int i = 2; i <= 6 ; i++) {
       displayImage(EMOJI[i]);
       delay(100);
     }
   }
   if(joy_x > 1000) {
+    bluetooth.print("1");
     for(int i = 7; i <= 11; i++) {
       displayImage(EMOJI[i]);
       delay(100);
     }
   }
   displayImage(EMOJI[1]);
-
+  if(bluetooth.available())
+  {
+    char toSend = (char)bluetooth.read();
+    Serial.print(toSend);
+  }
 }
