@@ -43,9 +43,12 @@ joy_y.enable_reporting()
 joy_push.enable_reporting()
 
 while 1:
-  print(joy_x.read())
-  print(joy_y.read())
-  print(joy_push.read())
+  x = joy_x.read()
+  y = joy_y.read()
+  push = joy_push.read()
+  
+  print(x + y + push)
+  
   why = sock.recv(1024)
   if(why == '1'):
     os.system(cmd1)
@@ -73,15 +76,3 @@ while 1:
   elif(why == '4'):
     os.system(kill)
 ###https://m.blog.naver.com/PostView.nhn?blogId=cosmosjs&logNo=220805719737&proxyReferer=https%3A%2F%2Fwww.google.co.kr%2F
-  
-  result = GPIO.input(23)
-  if result == 1:
-    count += 1
-  if count == 10:
-    os.system('python coolsms.py')
-    print("진동이 감지 되었습니다.")
-    time.sleep(0.05)
-    count = 0
-  else:
-    print("진동이 없습니다.")
-    time.sleep(0.05)
