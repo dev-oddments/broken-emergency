@@ -34,6 +34,7 @@ port = 1
 sock = bluetooth.BluetoothSocket( bluetooth.RFCOMM )
 sock.connect((bd_addr, port))
 data = ""
+
 cmd1 = 'feh -F --auto-zoom ~/disable_display/img/1_lf.png &'
 cmd2 = 'feh -F --auto-zoom ~/disable_display/img/2_ri.png &'
 smile = 'feh -F --auto-zoom ~/disable_display/img/3_smile.png &'
