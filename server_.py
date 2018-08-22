@@ -45,7 +45,7 @@ joy_push.enable_reporting()
 while 1:
   print(joy_x.read())
   print(joy_y.read())
-  println(joy_push.read())
+  print(joy_push.read())
   why = sock.recv(1024)
   if(why == '1'):
     os.system(cmd1)
