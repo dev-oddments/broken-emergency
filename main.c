@@ -288,6 +288,10 @@ void loop() {
     displayImage(EMOJI[12]);
     delay(200);
   }
+  if(joy_x > 400 && joy_x < 600 && joy_y > 400 && joy_y < 600) {
+    bluetooth.write("0");
+    delay(200);
+  }
   
   displayImage(EMOJI[1]); // default 
   
