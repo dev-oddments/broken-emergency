@@ -40,6 +40,7 @@ while 1:
   if(why == '1'):
     os.system(cmd1)
     while(why == '1'):
+      why = sock.recv(1024)
       time.sleep(0.5)
     os.system(default)
     print("ln")
@@ -47,6 +48,7 @@ while 1:
   elif(why == '2'):
     os.system(cmd2)
     while(why == '2'):
+      why = sock.recv(1024)
       time.sleep(0.5)
     os.system(default)
     print("lu")
@@ -54,6 +56,7 @@ while 1:
   elif(why == '3'):
     os.system(smile)
     while(why == '3'):
+      why = sock.recv(1024)
       time.sleep(0.5)
     os.system(default)
  
