@@ -3,7 +3,7 @@ import bluetooth
 import os
 import sys
 import time
-from pyFirmata import Arduino, util
+from pyfirmata import Arduino, util
 import time
 
 board = Arduino('/dev/ttyACM0')
