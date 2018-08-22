@@ -6,7 +6,7 @@ import time
 from pyFirmata import Arduino, util
 import time
 
-board = Arduino(‘/dev/ttyACM0’)
+board = Arduino('/dev/ttyACM0')
 joy_x = board.get_pin('a:1:i')# analog/digital:pin_num:input/output 
 joy_y = board.get_pin('a:0:i')
 joy_push = board.get_pin('d:3:i')
