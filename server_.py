@@ -33,11 +33,14 @@ kill = 'pkill -9 -ef feh'
 count = 0
 
 board = Arduino('/dev/ttyACM0')
-joy_x = board.get_pin('a:1:i')# analog/digital:pin_num:input/output 
-joy_y = board.get_pin('a:0:i')
-joy_push = board.get_pin('d:3:i')
+
 it = util.Iterator(board)
 it.start()
+
+joy_x = board.get_pin('a:1:p')# analog/digital:pin_num:input/output 
+joy_y = board.get_pin('a:0:p')
+joy_push = board.get_pin('d:3:i')
+
 joy_x.enable_reporting()
 joy_y.enable_reporting()
 joy_push.enable_reporting()
@@ -47,7 +50,9 @@ while 1:
   y = joy_y.read()
   push = joy_push.read()
   
-  print(x + y + push)
+  print(x)
+  print(y)
+  print(push)
   
   why = sock.recv(1024)
   if(why == '1'):
