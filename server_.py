@@ -3,12 +3,18 @@ import bluetooth
 import os
 import sys
 import time
-
-import RPi.GPIO as GPIO
+from pyFirmata import Arduino, util
 import time
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-time.sleep(1)
+
+board = Arduino(‘/dev/ttyACM0’)
+joy_x = board.get_pin('a:1:i')# analog/digital:pin_num:input/output 
+joy_y = board.get_pin('a:0:i')
+joy_push = board.get_pin('d:3:i')
+it = util.Iterator(board)
+it.start()
+joy_x.enable_reporting()
+joy_y.enable_reporting()
+joy_push.enable_reporting()
 
 print "Searching for devices..."
 print ""
@@ -36,6 +42,9 @@ kill = 'pkill -9 -ef feh'
 count = 0
 
 while 1:
+  print(joy_x.read())
+  print(joy_y.read())
+  println(joy_push.read())
   why = sock.recv(1024)
   if(why == '1'):
     os.system(cmd1)
