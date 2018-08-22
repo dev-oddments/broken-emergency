@@ -3,7 +3,7 @@ import bluetooth
 import os
 import sys
 import time
-from serial import serial
+import serial
 import time
 
 
@@ -15,9 +15,29 @@ kill = 'pkill -9 -ef feh'
 count = 0
 
 
-ser = serial.Serial('/dev/ttyACM0',9600)
-
+ser = serial.Serial('/dev/ttyACM0',9600, timeout = 1)
 while 1:
-  read_serial=ser.readline()
-  print(read_serial)
-  
+  why=ser.read(1)
+  if(why == '1'):
+    os.system(cmd1)
+    while(why == '1'):
+      why=ser.readline(1)
+      time.sleep(0.01)
+    os.system(default)
+    
+  elif(why == '2'):
+    os.system(cmd2)
+    while(why == '2'):
+      why=ser.readline(1)
+      time.sleep(0.01)
+    os.system(default)
+
+  elif(why == '3'):
+    os.system(smile)
+    while(why == '3'):
+      why=ser.readline(1)
+      time.sleep(0.01)
+    os.system(default)
+ 
+  elif(why == '4'):
+    os.system(kill)
