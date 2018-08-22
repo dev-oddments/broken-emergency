@@ -39,19 +39,22 @@ while 1:
   why = sock.recv(1024)
   if(why == '1'):
     os.system(cmd1)
-    time.sleep(100)
+    while(why == '1'):
+      time.sleep(0.5)
     os.system(default)
     print("ln")
     
   elif(why == '2'):
     os.system(cmd2)
-    time.sleep(100)
+    while(why == '2'):
+      time.sleep(0.5)
     os.system(default)
     print("lu")
 
   elif(why == '3'):
     os.system(smile)
-    time.sleep(100)
+    while(why == '3'):
+      time.sleep(0.5)
     os.system(default)
  
   elif(why == '4'):
@@ -59,13 +62,13 @@ while 1:
 ###https://m.blog.naver.com/PostView.nhn?blogId=cosmosjs&logNo=220805719737&proxyReferer=https%3A%2F%2Fwww.google.co.kr%2F
   
   result = GPIO.input(23)
-	if result == 1:
+  if result == 1:
     count += 1
-    if count == 10:
-      os.system('python coolsms.py')
-		  print("진동이 감지 되었습니다.")
-		  time.sleep(0.05)
-      count = 0
-	else:
-		print("진동이 없습니다.")
-		time.sleep(0.05)
+  if count == 10:
+    os.system('python coolsms.py')
+    print("진동이 감지 되었습니다.")
+    time.sleep(0.05)
+    count = 0
+  else:
+    print("진동이 없습니다.")
+    time.sleep(0.05)
