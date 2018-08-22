@@ -6,16 +6,6 @@ import time
 from pyfirmata import Arduino, util
 import time
 
-board = Arduino('/dev/ttyACM0')
-joy_x = board.get_pin('a:1:i')# analog/digital:pin_num:input/output 
-joy_y = board.get_pin('a:0:i')
-joy_push = board.get_pin('d:3:i')
-it = util.Iterator(board)
-it.start()
-joy_x.enable_reporting()
-joy_y.enable_reporting()
-joy_push.enable_reporting()
-
 print "Searching for devices..."
 print ""
 nearby_devices = bluetooth.discover_devices()
@@ -41,6 +31,16 @@ smile = 'feh -F --auto-zoom ~/disable_display/img/3_smile.png &'
 default = 'feh -F --auto-zoom img/default.png &'
 kill = 'pkill -9 -ef feh'
 count = 0
+
+board = Arduino('/dev/ttyACM0')
+joy_x = board.get_pin('a:1:i')# analog/digital:pin_num:input/output 
+joy_y = board.get_pin('a:0:i')
+joy_push = board.get_pin('d:3:i')
+it = util.Iterator(board)
+it.start()
+joy_x.enable_reporting()
+joy_y.enable_reporting()
+joy_push.enable_reporting()
 
 while 1:
   print(joy_x.read())
