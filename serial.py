@@ -3,7 +3,7 @@ import bluetooth
 import os
 import sys
 import time
-import serial
+from serial import serial
 import time
 
 
