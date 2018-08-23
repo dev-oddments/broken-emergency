@@ -29,3 +29,5 @@
 - [ ] 헬멧에 충격센서 연결(helmet.ino 수정) 및 충격신호 감지시 깨진이미지 dot matrix 및 LCD에 출력 및 보호자에게 SMS, Mail 전송 // 
 
 coolsms | [Line API](http://blog.daum.net/_blog/BlogTypeView.do?blogid=0drsH&articleno=80&categoryId=4&regdt=20180720181606) | [Telegram](http://egloos.zum.com/mcchae/v/11263778) | [Mail](http://pythonstudy.xyz/python/article/508-%EB%A9%94%EC%9D%BC-%EB%B3%B4%EB%82%B4%EA%B8%B0-SMTP)
+
+ Dweet.io & Freeboard.io
