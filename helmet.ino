@@ -129,6 +129,17 @@ const byte EMOJI[][8] = { // http://xantorohara.github.io/led-matrix-editor/
     B01000010,
     B00111100
   } // cancle 12
+  ,
+  {
+      B11111111,
+      B11111111,
+      B10111101,
+      B10011001,
+      B10000001,
+      B10000001,
+      B11111111,
+      B00000000
+    }
 /*
   {
     B00010000,
@@ -226,17 +237,29 @@ const byte EMOJI[][8] = { // http://xantorohara.github.io/led-matrix-editor/
 const int IMAGES_LEN = sizeof(EMOJI) / 8;
 LedControl display = LedControl(DIN_PIN, CLK_PIN, CS_PIN); // (DIN, CS, CLK, 1dot) ___DOT___
 
+const int DIN_PIN_ = 11;
+const int CS_PIN_ = 10;
+const int CLK_PIN_ = 9;
+LedControl display_ = LedControl(DIN_PIN_, CLK_PIN_, CS_PIN_);
+
+
+
 int bluetoothTx = 2;
 int bluetoothRx = 3;
 SoftwareSerial bluetooth(bluetoothTx, bluetoothRx); // ___bluetooth___
 
+
 void setup() {
-  Serial.begin(9600);    
-  
+  Serial.begin(9600);
+
   display.shutdown(0, false);
   display.setIntensity(0, 5); // LED 밝기(0~15)
   display.clearDisplay(0); // ___DOT___
-  
+
+  display_.shutdown(0, false);
+  display_.setIntensity(0, 5); // LED 밝기(0~15)
+  display_.clearDisplay(0); // ___DOT___
+
   bluetooth.begin(9600); // ___bluetooth___
 }
 
@@ -244,14 +267,26 @@ void displayImage(const byte* image) {
   for (int i = 0; i < 8; i++) {
     for (int j = 0; j < 8; j++) {
       display.setLed(0, i, j, bitRead(image[i], 7 - j));
+      display_.setLed(0, i, j, bitRead(image[i], 7 - j));
     }
   }
 }
 
 char why;
 void loop() {
+  int warning;
+  warning = 0;
+  warning=analogRead(7);
+
+  if(warning > 250){
+    bluetooth.write('8');
+    displayImage(EMOJI[13]);
+    delay(200);
+    Serial.println(warning);
+  }
+
   why = (char)bluetooth.read();
-  
+
   if(why == '1') { // left
     while(why == '1'){
       for(int i = 2; i <= 6 ; i++) {
@@ -263,7 +298,7 @@ void loop() {
       why = (char)bluetooth.read();
     }
   }
-  
+
   if(why == '2') { // right
     while(why == '2') {
       for(int i = 7; i <= 11; i++) {
@@ -276,22 +311,26 @@ void loop() {
     }
   }
 
-  if(why == '3') { // smile
+  if(why == '3') { // smile (Down)
     while(why == '3') {
       why = (char)bluetooth.read();
       displayImage(EMOJI[0]);
-      }
-  }
-  
-  if(why == '4') { // kill
-    while(why == '4') {
-      why = (char)bluetooth.read();
-      displayImage(EMOJI[12]);
+      delay(100);
+      if(why != '3'){ break;}
       }
   }
 
-  
-  displayImage(EMOJI[1]); // default 
+  if(why == '4') { // kill (Up)
+    while(why == '4') {
+      why = (char)bluetooth.read();
+      displayImage(EMOJI[12]);
+      delay(100);
+      if(why != '4'){ break;}
+      }
+  }
+
+
+  displayImage(EMOJI[1]); // default
 /*
   if(bluetooth.available())
   {
