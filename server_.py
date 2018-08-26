@@ -3,7 +3,6 @@ import bluetooth
 import os
 import sys
 import time
-from pyfirmata import Arduino, util
 import time
 import serial
 
@@ -37,34 +36,41 @@ count = 0
 ser = serial.Serial('/dev/ttyACM0',9600, timeout = 1)
 
 while 1:
+  if(sock.recv(1)== '8'):
+    os.system("python sms.py")
+    os.system("feh -F --auto-zoom img/5.jpeg &")
+
   why=ser.read(1)
   if(why == '1'):
     os.system(cmd1)
     while(why == '1'):
       why=ser.readline(1)
-      sock.sendall('1')
+      sock.send('1')
       time.sleep(0.005)
-    sock.sendall('9')
+    sock.send('9')
     os.system(default)
     
   elif(why == '2'):
     os.system(cmd2)
     while(why == '2'):
       why=ser.readline(1)
-      sock.sendall('2')
+      sock.send('2')
       time.sleep(0.005)
-    sock.sendall('9')
+    sock.send('9')
     os.system(default)
 
   elif(why == '3'):
     os.system(smile)
     while(why == '3'):
       why=ser.readline(1)
-      sock.sendall('3')
+      sock.send('3')
       time.sleep(0.005)
-    sock.sendall('9')
+    sock.send('9')
     os.system(default)
  
   elif(why == '4'):
-    sock.sendall('4')
+    sock.send('4')
     os.system(kill)
+
+  elif(why == '8'):
+    os.system("python sms.py")
