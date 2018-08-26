@@ -25,8 +25,8 @@ sock = bluetooth.BluetoothSocket( bluetooth.RFCOMM )
 sock.connect((bd_addr, port))
 data = ""
 
-cmd1 = 'feh -F --auto-zoom ~/disable_display/img/1_lf.png &'
-cmd2 = 'feh -F --auto-zoom ~/disable_display/img/2_ri.png &'
+cmd2 = 'feh -F --auto-zoom ~/disable_display/img/1_lf.png &'
+cmd1 = 'feh -F --auto-zoom ~/disable_display/img/2_ri.png &'
 smile = 'feh -F --auto-zoom ~/disable_display/img/3_smile.png &'
 default = 'feh -F --auto-zoom img/default.png &'
 kill = 'pkill -9 -ef feh'
@@ -36,11 +36,10 @@ count = 0
 ser = serial.Serial('/dev/ttyACM0',9600, timeout = 1)
 
 while 1:
-  if(sock.recv(1)== '8'):
-    os.system("python sms.py")
-    os.system("feh -F --auto-zoom img/4.png &")
-
+    
   why=ser.read(1)
+
+
   if(why == '1'):
     os.system(cmd1)
     while(why == '1'):
@@ -72,5 +71,7 @@ while 1:
     sock.send('4')
     os.system(kill)
 
-  elif(why == '8'):
+  
+  if(sock.recv == '8'):
     os.system("python sms.py")
+    os.systme("feh -F --auto-zoom img/4.png &")
