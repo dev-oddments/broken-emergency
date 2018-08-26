@@ -38,7 +38,7 @@ ser = serial.Serial('/dev/ttyACM0',9600, timeout = 1)
 while 1:
   if(sock.recv(1)== '8'):
     os.system("python sms.py")
-    os.system("feh -F --auto-zoom img/5.jpeg &")
+    os.system("feh -F --auto-zoom img/4.png &")
 
   why=ser.read(1)
   if(why == '1'):
