@@ -3,8 +3,10 @@
 > via Maker Campus-A-Thon(KAIST)
 
 Broken-emergency is communication gadget(attach behind of helmet) for bicycle rider or electric kickboard rider.
+
 You can send message with of 2pcs dot matrix, control by joystick that placed on bicycle handle. 
-If helmet is shocked, send emergency SMS(or other messenger) to parents or relate person.
+
+If your helmet is shocked, send emergency SMS(or other messenger) to parents or relate person.
 
 ## testing
 
