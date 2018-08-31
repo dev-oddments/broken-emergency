@@ -1,11 +1,11 @@
 # broken-emergency [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 > via Maker Campus-A-Thon(KAIST)
-```
+
 Broken-emergency is communication gadget(attach behind of helmet) for bicycle rider or electric kickboard rider.
-You can send message with 2pcs dot matrix, control by joystick that placed on bicycle handle. 
-If helmet is shocked, send emergency SMS to parents or relate person.
-```
+You can send message with of 2pcs dot matrix, control by joystick that placed on bicycle handle. 
+If helmet is shocked, send emergency SMS(or other messenger) to parents or relate person.
+
 ## testing
 
 ![testing](https://user-images.githubusercontent.com/16266103/44921763-6b26f580-ad7e-11e8-97a9-fa768d8790f6.gif)
