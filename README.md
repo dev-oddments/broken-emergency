@@ -12,6 +12,8 @@ If your helmet is shocked, send emergency SMS(or other messenger) to parents or 
 
 ![testing](https://user-images.githubusercontent.com/16266103/44921763-6b26f580-ad7e-11e8-97a9-fa768d8790f6.gif)
 
+![final](https://user-images.githubusercontent.com/16266103/45395851-11bea080-b673-11e8-96b5-f6f1aee83798.jpeg)
+
 ## add later
 - Make application: current location, destination, speed(reed switch), tail light control
 - Detect shock of helmet then send message - [Line API](http://blog.daum.net/_blog/BlogTypeView.do?blogid=0drsH&articleno=80&categoryId=4&regdt=20180720181606) | [Telegram](http://egloos.zum.com/mcchae/v/11263778) | [Mail](http://pythonstudy.xyz/python/article/508-%EB%A9%94%EC%9D%BC-%EB%B3%B4%EB%82%B4%EA%B8%B0-SMTP)
