@@ -279,10 +279,10 @@ void loop() {
 
   if(joy_x > 1000) { // left
     while(joy_x > 1000){
-      for(int i = 2; i <= 6 ; i++) {
+      for(int i = 7; i <= 11 ; i++) {
         displayImage(EMOJI[i]);
         delay(100);
-        why = (char)bluetooth.read();
+        joy_x = analogRead(JOY_X);
         if(joy_x < 1000){ break;}
       }
       int joy_x = analogRead(JOY_X); 
@@ -291,10 +291,10 @@ void loop() {
 
   if(joy_x < 100) { // right
     while(joy_x < 100) {
-      for(int i = 7; i <= 11; i++) {
+      for(int i = 2; i <= 6; i++) {
         displayImage(EMOJI[i]);
         delay(100);
-        why = (char)bluetooth.read();
+        joy_x = analogRead(JOY_X);
         if(joy_x > 100){ break;}
       }
       int joy_x = analogRead(JOY_X); 
@@ -303,7 +303,7 @@ void loop() {
 
   if(joy_y > 1000) { // smile (Down)
     while(joy_y > 1000) {
-      why = (char)bluetooth.read();
+      joy_y = analogRead(JOY_Y);
       displayImage(EMOJI[0]);
       delay(100);
       if(joy_y < 1000){ break;}
@@ -312,7 +312,7 @@ void loop() {
 
   if(joy_y < 100) { // kill (Up)
     while(joy_y < 100) {
-      why = (char)bluetooth.read();
+      joy_y = analogRead(JOY_Y);
       displayImage(EMOJI[12]);
       delay(100);
       if(joy_y > 100){ break;}
