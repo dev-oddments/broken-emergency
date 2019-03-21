@@ -225,15 +225,17 @@ void scroll(char* text) {
   int joy_y = analogRead(JOY_Y);
   for (int x=scrollPositions / 2; x>=-scrollPositions; x--) {
    for(uint8_t m=0; m<NUM_MATRICES; m++) {
+    delay(120);
+    if(joy_x < 400 || joy_x > 600 || joy_y < 400 || joy_y > 600){break;}
+    joy_x = analogRead(JOY_X); 
+    joy_y = analogRead(JOY_Y);      
+     
     matrix[m].clear();
     matrix[m].setCursor((x - (m * 8)), 0);
     matrix[m].print(text);
     matrix[m].writeDisplay();
    }
-   if(joy_x < 400 || joy_x > 600 || joy_y < 400 || joy_y > 600){break;}
-    joy_x = analogRead(JOY_X); 
-    joy_y = analogRead(JOY_Y);      
-   delay(120);
+
   }
 
 }
@@ -253,9 +255,6 @@ void defaultSign() {
   }
 }
 
-
-
-      matrix[i].drawBitmap(
 void leftSign() {
   for(int x = 0; x < 5; x++) {
     delay(100);
