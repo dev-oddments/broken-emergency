@@ -6,7 +6,7 @@
 Adafruit_8x8matrix matrix[NUM_MATRICES];
 
 const int JOY_X = A1; // analog
-const int JOY_Y = A3; // analog ___ JOY __
+const int JOY_Y = A4; // analog ___ JOY __
 int boot_flag = 0;
 void setup() {
   Serial.begin(9600);
@@ -234,7 +234,7 @@ void scroll(char* text) {
     joy_y = analogRead(JOY_Y); 
     if(joy_x < 400 || joy_x > 600 || joy_y < 400 || joy_y > 600){break;}     
    }
-   delay(30);
+   delay(90);
   }
 
 }
