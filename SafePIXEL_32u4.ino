@@ -11,14 +11,12 @@ int boot_flag = 0;
 void setup() {
   Serial.begin(9600);
   Serial.println("8x8 LED Matrix Test");
-
   for(uint8_t m=0; m<NUM_MATRICES; m++) {
     matrix[m].begin(0x70 + m);
     matrix[m].clear();
     matrix[m].setTextSize(1);
     matrix[m].setTextWrap(false);  // we dont want text to wrap so it scrolls nicely
     matrix[m].setRotation(1);
-
   }
   
 }
@@ -203,6 +201,8 @@ void loop() {
   int joy_x = analogRead(JOY_X);                           // 변수 X에 아날로그 1번핀에 입력되는 신호를 대입
   int joy_y = analogRead(JOY_Y);                           // 변수 Y에 아날로그 0번핀에 입력되는 신호를 대입
 
+  Serial.println(joy_x);
+  Serial.println(joy_y);
   if(joy_y < 100) { // left
     leftSign();
   }
@@ -215,24 +215,16 @@ void loop() {
   if(joy_x < 100) {
     alertSign();
   }
-//  leftSign();
-//  delay(500);
-//  delay(500);
 }
 
 void scroll(char* text) {
   int scrollPositions = (strlen(text) * 4) + 4;
-  int joy_x = analogRead(JOY_X); 
-  int joy_y = analogRead(JOY_Y);
   for (int x=scrollPositions / 2; x>=-scrollPositions; x--) {
    for(uint8_t m=0; m<NUM_MATRICES; m++) {
     matrix[m].clear();
     matrix[m].setCursor((x - (m * 8)), 0);
     matrix[m].print(text);
-    matrix[m].writeDisplay();
-    joy_x = analogRead(JOY_X); 
-    joy_y = analogRead(JOY_Y); 
-    if(joy_x < 400 || joy_x > 600 || joy_y < 400 || joy_y > 600){break;}     
+    matrix[m].writeDisplay();   
    }
    delay(90);
   }
