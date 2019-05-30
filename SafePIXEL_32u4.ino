@@ -5,15 +5,11 @@
 #define NUM_MATRICES 4
 Adafruit_8x8matrix matrix[NUM_MATRICES];
 
-const int JOY_X = A1; // analog
-const int JOY_Y = A2; // analog ___ JOY __
+const int JOY_X = A1; 
+const int JOY_Y = A2; 
 int boot_flag = 0;
 void setup() {
   Serial.begin(9600);
-
-//  matrix[0].begin(0x70);
-//  matrix[1].begin(0x71);
-//  matrix[2].begin(0x74);
   Serial.println("8x8 LED Matrix Test");
   for(uint8_t m=0; m<NUM_MATRICES; m++) {
     if(m != 2) {
@@ -210,15 +206,15 @@ void loop() {
   if(boot_flag == 0){
     boot();
   }
-  int joy_x = analogRead(JOY_X);                           // 변수 X에 아날로그 1번핀에 입력되는 신호를 대입
-  int joy_y = analogRead(JOY_Y);                           // 변수 Y에 아날로그 0번핀에 입력되는 신호를 대입
+  int joy_x = analogRead(JOY_X);                       
+  int joy_y = analogRead(JOY_Y);                          
 
   Serial.println(joy_x);
   Serial.println(joy_y);
-  if(joy_y < 100) { // right
+  if(joy_y < 100) {
     rightSign();
   }
-  if(joy_y > 1000) { // left
+  if(joy_y > 1000) { 
     leftSign();
   }
   if(joy_x > 400 && joy_x < 600 && joy_y > 400 && joy_y < 600) {
@@ -226,6 +222,9 @@ void loop() {
   }
   if(joy_x < 100) {
     alertSign();
+  }
+  if(joy_x > 1000) {
+    thanks();
   }
 }
 
@@ -249,6 +248,9 @@ void boot() {
 
 }
 
+void thanks() {
+  scroll("THANKS ^_^");
+}
 
 void defaultSign() {
   for(uint8_t i=0; i<3; i++) {
