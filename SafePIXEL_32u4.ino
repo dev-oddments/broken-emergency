@@ -2,21 +2,33 @@
 #include "Adafruit_LEDBackpack.h"
 #include "Adafruit_GFX.h"
 
-#define NUM_MATRICES 3
+#define NUM_MATRICES 4
 Adafruit_8x8matrix matrix[NUM_MATRICES];
 
 const int JOY_X = A1; // analog
-const int JOY_Y = A4; // analog ___ JOY __
+const int JOY_Y = A2; // analog ___ JOY __
 int boot_flag = 0;
 void setup() {
   Serial.begin(9600);
+
+//  matrix[0].begin(0x70);
+//  matrix[1].begin(0x71);
+//  matrix[2].begin(0x74);
   Serial.println("8x8 LED Matrix Test");
   for(uint8_t m=0; m<NUM_MATRICES; m++) {
-    matrix[m].begin(0x70 + m);
-    matrix[m].clear();
-    matrix[m].setTextSize(1);
-    matrix[m].setTextWrap(false);  // we dont want text to wrap so it scrolls nicely
-    matrix[m].setRotation(1);
+    if(m != 2) {
+      matrix[m].begin(0x70 + m);
+      matrix[m].clear();
+      matrix[m].setTextSize(1);
+      matrix[m].setTextWrap(false);  // we dont want text to wrap so it scrolls nicely
+      matrix[m].setRotation(3);
+    } else {
+      matrix[m].begin(0x74);
+      matrix[m].clear();
+      matrix[m].setTextSize(1);
+      matrix[m].setTextWrap(false);  // we dont want text to wrap so it scrolls nicely
+      matrix[m].setRotation(3);
+    }
   }
   
 }
@@ -203,11 +215,11 @@ void loop() {
 
   Serial.println(joy_x);
   Serial.println(joy_y);
-  if(joy_y < 100) { // left
-    leftSign();
+  if(joy_y < 100) { // right
+    rightSign();
   }
   if(joy_y > 1000) { // left
-    rightSign();
+    leftSign();
   }
   if(joy_x > 400 && joy_x < 600 && joy_y > 400 && joy_y < 600) {
     defaultSign();
